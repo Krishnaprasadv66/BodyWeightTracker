@@ -1,0 +1,15 @@
+{% extends 'layout/base.html' %}
+
+{% block 'content' %}
+
+  <div class="bg-image-login text-center">
+
+    <h2 class="text-success">Login</h2>
+  <form method="post" class="mt-5">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Login</button>
+  </form>
+
+  </div>
+{% endblock %}

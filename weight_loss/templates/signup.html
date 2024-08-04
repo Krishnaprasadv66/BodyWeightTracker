@@ -1,0 +1,39 @@
+{% extends 'layout/base.html' %}
+
+{% block 'content' %}
+  <div class="bg-image-signup text-danger text-center">
+    <br><br>
+    <div class="container bg-white " style="width: 500px;"  >
+      <h1><b style="color: green; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Sign Up</b> </h1>
+  
+      <p class="text-dark ">Please fill in this form to create an account</p>
+  
+  
+      {{form.errors}}
+      <form method="post">
+        
+       {% csrf_token %}
+  
+          <label for="id_username" class="text-primary" style="font-weight: bold;">Username:</label>
+                <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required aria-describedby="id_username_helptext" id="id_username" class="form-control bg-light px-3 mt-1" placeholder="Username">
+  
+            <label for="id_password1" class="text-primary mt-2" style="font-weight: bold;">Password:</label>
+                <input type="password" name="password1" autocomplete="new-password" required aria-describedby="id_password1_helptext" id="id_password1" class="form-control bg-light px-3 mt-1" placeholder="Password">
+  
+            <label for="id_password2" class="text-primary mt-2" style="font-weight: bold;">Conf Password:</label>
+                <input type="password" name="password2" autocomplete="new-password" required aria-describedby="id_password2_helptext" id="id_password2" class="form-control bg-light px-3 mt-1" placeholder="Confirm Password">
+  
+  
+  
+  
+                <button type="submit" class="btn btn-success text-center mt-2 mb-2">Sign Up</button>
+  
+                 
+  
+      </form>
+    </div> 
+  
+    <p class="text-white mt-4 text-center ">Alredy have an account? 
+      <a href="{% url 'login'  %}" class="text-decoration-underline text-white">Login here</a> </p>
+  </div>
+{% endblock %}

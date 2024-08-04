@@ -1,0 +1,199 @@
+{% extends 'layout/base.html' %}
+{% block 'content' %}
+
+<style>
+        .inp{
+                background-color: rgb(203, 234, 234);
+                color: red;
+        }
+
+        .lab{
+                color:purple;
+                font-size: large;
+                font-weight: bold;
+        }
+
+        .p{
+                color: darkgreen;
+                font-weight: bold;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .c{
+                color: crimson;
+                font-weight: bolder;
+        }
+        .r{
+                color:rgb(142, 77, 232);
+                font-weight: bold;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+
+        .rc{
+                color: rgb(29, 202, 142);
+                font-weight: bolder;
+        }
+</style>
+
+
+
+
+
+
+
+
+<div class="bg-image-weightlist text-center ">
+
+                <h2> WEIGHT CHART</h2>
+
+        <div class="center">
+        
+
+                <table  class="text-center table ">
+        
+                <tr class="text-danger" >
+                <th>ID</th>
+                <th>NAME</th>
+                <th>WEIGHT</th>
+                <th>TIME OF MARKING</th>
+                <th>DATE OF MARKING</th>
+                <th>ACTION</th>
+                </tr>
+        
+                {% for weightlist in page_obj %}
+                        <tr style="font-weight: bold;">
+                        <td>{{ weightlist.user|upper }}</td>
+                        <td>{{ weightlist.name|upper }}</td>
+                        <td>{{ weightlist.weight|upper }}</td>
+                        <td>{{ weightlist.timeOfmarking|date:"h:i A" }}</td>
+                        <td>{{ weightlist.dateOfMarking|upper }}</td>
+                        <td><a href="{%url 'editdata' weightlist.id %}" class="btn btn-primary" value="edit" type="submit"><i class="fa fa-edit"></i></i></a>
+                                &nbsp;   
+                        <button data-toggle="modal" data-target="#myModal{{ weightlist.id }}"  class="btn btn-danger">
+                                <i class="fa fa-trash">
+                        </button></td>
+                        </tr> 
+
+
+                        <div class="modal fade" id="myModal{{ weightlist.id }}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form id="deleteForm{{ weightlist.id }}" method="post" action="{% url 'deletedata' weightlist.id %}">
+                                            {% csrf_token %}
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-primary">Confirm Delete</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body text-danger">
+                                                <p>Are you sure you want to delete the weight of "{{ weightlist.name|upper }}"on '{{ weightlist.dateOfMarking }}'?</p>
+                                            </div>
+                                           
+                                            <div class="modal-footer">
+                                                
+                                                  <button type="submit" value="edit" type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+
+
+
+
+                        
+                {% endfor %}
+                </table>
+        </div>
+        <nav aria-label="Page navigation example" style="margin:auto;">
+                {% if page_obj.has_previous %}
+                        
+                        <a href="?page=1"class="btn btn-success">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-success" aria-label="previous">&laquo; prev</a>
+                {% endif %}
+        
+                {% for page_number in page_obj.paginator.get_elided_page_range %}
+                        {% if page_obj.number == page_number %}
+                                <span class="btn btn-warning mt-5">{{ page_number }}</span>
+                        {% else %}
+                                <a href="?page={{ page_number }}" class="btn btn-success">{{ page_number }}</a>
+                        {% endif %}
+                {% endfor %}
+        
+                {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}" class="btn btn-success">next &raquo;</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-success">last &raquo;</a>
+                {% endif %}
+        </nav>
+
+
+       
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+                $(document).ready(function() {
+                // Function to compare weights
+                function compareWeights() {
+                        var date1 = $('#date1').val();
+                        var date2 = $('#date2').val();
+
+                        $.ajax({
+                        url: '/compare_weights/',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                                date1: date1,
+                                date2: date2
+                        },
+                        success: function(response) {
+                                // Handle the response
+                                if (response.error) {
+                                console.error('Error:', response.error);
+                                } else {
+                                // Update HTML elements with comparison results
+                                $('#weight1').text(response.weight1);
+                                $('#date1Result').text(response.date1);
+                                $('#weight2').text(response.weight2);
+                                $('#date2Result').text(response.date2);
+                                $('#comparison_result').text(response.comparison_result);
+                                }
+                        },
+                        error: function(xhr, errmsg, err) {
+                                console.log(xhr.status + ": " + xhr.responseText);
+                        }
+                        });
+                }
+
+                // Call the compareWeights function when the button is clicked
+                $('#compareButton').click(function compare_weights() {
+                        compareWeights();
+                });
+                });
+        </script>
+        
+        <hr>
+
+<div style="width: 500px; background-color: rgb(181, 127, 156); margin-left: 500px;;" class="text-center">
+        <div>
+                <label for="date1" class="lab">DATE 1:</label>
+                <input type="date" id="date1" name="date1" class="inp">&nbsp;
+        
+                <label for="date2" class="lab">DATE 2:</label>
+                <input type="date" id="date2" name="date2" class="inp">
+        
+                <button id="compareButton" class="btn btn-danger btn-sm text-center">Weight Difference</button>
+        </div>
+        <div>
+                <p class="p">Weight-1: &nbsp; <span id="weight1" class="r"></span></p>
+                <p class="p">Date-1: &nbsp; <span id="date1Result" class="r"></span></p>
+                <p class="p">Weight-2: &nbsp; <span id="weight2" class="r"></span></p>
+                <p class="p">Date-2: &nbsp; <span id="date2Result" class="r"></span></p>
+                <p class="c">Comparison Result: &nbsp; <span id="comparison_result" class="rc"></span></p>
+        </div>
+        <br>
+
+</div>
+
+</div>
+
+        
+{% endblock %}

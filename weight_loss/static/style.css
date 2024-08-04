@@ -1,0 +1,53 @@
+.bgimage{
+    background-image: url(../static/image6.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.bg-image-weightlist{
+    background-image: url(../static/images15.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.bg-image-signup{
+    background-image: url(../static/images14.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+
+
+.bg-image-login{
+    background-image: url(../static/image5.avif);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+}
+
+
+
+.markweight{
+    background-image: url(../static/images17.webp);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: beige;
+}
+
+#h1{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight:normal;
+   
+}
+
+
+.inp{
+    color: red;
+    background-color: aqua;
+}
+

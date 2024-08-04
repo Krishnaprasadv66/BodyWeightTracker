@@ -1,0 +1,15 @@
+{% extends 'layout/base.html'%}
+{%block 'content'%}
+
+<div class="text-center">
+
+    <p class="text-warning mt-5">Are you sure you want to delete {{ weightlist.name }}?</p>
+
+    <form method="post" action="">
+        {% csrf_token %}
+    
+        <input type="submit" value="Confirm" class="btn-primary">
+    </form>
+
+</div>
+{% endblock %}

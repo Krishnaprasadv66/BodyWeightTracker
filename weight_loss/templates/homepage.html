@@ -1,0 +1,37 @@
+{% extends 'layout/base.html'%}
+{% block 'content' %}
+
+{% if user.is_authenticated %}
+    <div class="container-fluid">
+
+
+        <div class="mt-5 text-center ">
+          <h1 class="text-center text-danger display-1 text-xl " id="h1">TRACK YOUR WEIGHT</h1>
+
+        </div>
+
+        <div class="text-center " style="margin-top: 200px;">
+            <h1 class="text-center text-primary text-xl " id="h1">welcome {{ user.username|upper }}</h1>
+  
+          </div>
+
+
+    </div>
+
+{% else %}
+
+
+    <div class="container-fluid">
+
+
+      <div class="mt-5 text-center ">
+        <h1 class="text-center text-danger display-1 text-xl " id="h1">TRACK YOUR WEIGHT</h1>
+
+      </div>
+
+
+    </div>
+
+{% endif %}    
+    
+{% endblock %}

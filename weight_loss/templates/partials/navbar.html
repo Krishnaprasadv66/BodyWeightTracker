@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+<!-- bootstrap link -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">  
+</head>
+<body>
+
+    
+    {% if user.is_authenticated %}
+    
+        <nav class="navbar navbar-expand-lg navbar-dark bg-warning p-0 m-0">
+            <div class="container-fluid">
+                <a href="#" class="navbar-brand text-dark pl-4">WEIGHT</a>
+                <div class="navbar-header ml-auto">
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#navone">
+                        <span class="navbar-toggler-icon "></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navone">
+                    <ul class="navbar-nav " >
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{% url 'home' %}" class="text-light">HOME</a>
+                        </li>
+
+                       
+
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{% url 'adddata' %}" class="text-light">MARK YOUR WEIGHT</a>
+                        </li>
+
+
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{% url 'listview' %}" class="text-light">WEIGHT CHART</a>
+                        </li>
+
+                        
+
+                        
+                    </ul>
+
+                    <div class="navbar-nav ml-auto">
+                        <a href="{% url 'logout' %}" class="nav-link text-light">LOGOUT</a>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </nav>
+    
+    {% else %}
+    
+        <nav class="navbar navbar-expand-lg navbar-dark bg-warning p-0 m-0">
+            <div class="container-fluid">
+                <a href="#" class="navbar-brand text-muted pl-4">WEIGHT</a>
+                <div class="navbar-header ml-auto">
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#navone">
+                        <span class="navbar-toggler-icon "></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navone">
+                    <ul class="navbar-nav " >
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{% url 'home' %}" class="text-light">HOME</a>
+                        </li>
+
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{% url 'signup' %}" class="text-light">SIGNUP</a>
+                        </li>
+
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{% url 'login' %}" class="text-light">LOGIN</a>
+                        </li>
+
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{% url 'adddata' %}" class="text-light">MARK YOUR WEIGHT</a>
+                        </li>
+
+
+                        <li class="nav-item ml-2 mr-2">
+                            <a href="{% url 'listview' %}" class="text-light">WEIGHT CHART</a>
+                        </li>
+
+                        
+
+                        
+                    </ul>
+
+                    
+
+                    
+                </div>
+            </div>
+        </nav>
+    
+    {% endif %}
+
+</body>
+</html>
+
+    
